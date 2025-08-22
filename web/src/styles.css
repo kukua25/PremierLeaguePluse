@@ -1,0 +1,249 @@
+/* ===========================
+   GLOBAL / SHARED
+   =========================== */
+
+:root{
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --card: #8b2f2f;
+  --border: #e5e7eb;
+  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+
+  /* New: hero band color (yellow) */
+  --hero-bg: #ffd84d; /* tweak if you want a different yellow */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root{
+    --bg: #0b1220;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --card: #0f1629;
+    --border: #1f2937;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.35);
+
+    /* Slightly warmer yellow in dark mode for contrast */
+    --hero-bg: #facc15;
+  }
+}
+
+*{ box-sizing: border-box; }
+html,body,#root{ height:100%; }
+
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* ===========================
+   HERO (full-width yellow band)
+   Used by: <div className="hero"> in App.jsx
+   =========================== */
+
+.hero{
+  background: var(--hero-bg);
+  padding: 2rem 0 5rem; /* extra bottom padding so text isn't clipped */
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  /* Elliptical shape that bulges downward */
+  clip-path: ellipse(120% 85% at 50% 0%);
+}
+
+/* Width constraint for content inside the hero without top margin */
+.container-hero{
+  max-width: 860px;
+  margin: 0 auto;    /* center horizontally */
+  padding: 0 1rem;   /* side padding matches .container */
+}
+
+/* Improve contrast of header text over yellow */
+.hero .title{
+  color: #111827; /* near-black for readability */
+}
+.hero .subtitle{
+  color: #374151; /* darker muted */
+}
+
+/* ===========================
+   APP LAYOUT (main content area)
+   =========================== */
+
+/* Original page container (used BELOW the hero) */
+.container{
+  max-width: 860px;
+  margin: 2rem auto;   /* slightly reduced now that hero adds visual height */
+  padding: 0 1rem;
+}
+
+/* Header inside the hero; we keep bottom spacing only */
+.header{
+  margin: 0 0 0.5rem 0;
+}
+
+.title{
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: .2px;
+  
+}
+.subtitle{
+  color: var(--muted);
+}
+
+/* Search bar below the hero, in the normal page background */
+.search{
+
+  margin: 1rem 0 1.25rem;
+}
+.search input{
+  width: 100%;
+  padding: .65rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  background: color-mix(in oklab, var(--card) 85%, transparent);
+  -webkit-backdrop-filter: blur(4px) saturate(1.05);
+  backdrop-filter: blur(4px) saturate(1.05);
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.search input::placeholder{ color: var(--muted); }
+
+.status{
+  margin: .5rem 0;
+}
+.status.error{ color: #b91c1c; }
+
+/* ===========================
+   ARTICLE LIST
+   =========================== */
+
+.grid{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.card{
+   background: color-mix(in oklab, var(--card) 88%, transparent);
+  webkit-backdrop-filter: saturate(1.05) blur(2px);
+  border: 1px solid color-mix(in oklab, var(--border), #000 6%);
+  border-radius: 14px;
+  padding: .9rem 1.1rem;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.card:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 10px 24px rgba(0,0,0,.06);
+  border-color: #cbd5e1;
+}
+.card:focus-visible{
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.card h3{
+  margin: 0 0 .35rem;
+  font-size: 1.05rem;
+}
+.card .summary{
+  margin: .2rem 0 .6rem;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+   line-clamp: 3;
+   overflow: hidden; 
+
+}
+.card .meta{
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+.content-bg {
+    background-color: rgb(30, 30, 30);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+/* ===========================
+   FOOTER
+   Used by: <Footer />
+   =========================== */
+
+.footer{
+  /* Slight glass effect so it sits nicely above image backgrounds */
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  backdrop-filter: blur(6px) saturate(1.05);
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+.footer-accent{
+  height: 4px;                 /* thin color bar */
+  background: var(--hero-bg);  /* ties footer to your yellow hero */
+}
+
+.footer-inner{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;              /* wraps nicely on small screens */
+}
+
+.credits{
+  margin: 0;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* Link group and button style */
+.links{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.btn-link{
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .45rem .7rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  background: color-mix(in oklab, var(--card) 90%, transparent);
+  box-shadow: var(--shadow);
+  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+.btn-link:hover{
+  transform: translateY(-1px);
+  border-color: #cbd5e1;
+}
+.btn-link:focus-visible{
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.icon{
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: currentColor;
+}
+
+
