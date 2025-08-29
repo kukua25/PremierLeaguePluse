@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// If you change your API port later, update target here.
+// API Target
 export default defineConfig({
   plugins: [react()],
   server: {
