@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  expo-app:
+    build: .
+    container_name: premier-league-pulse
+    ports:
+      - "19000:19000"  # Expo DevTools
+      - "19001:19001"  # Expo Metro Bundler
+      - "19002:19002"  # Expo Packager
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+      - REACT_NATIVE_PACKAGER_HOSTNAME=${REACT_NATIVE_PACKAGER_HOSTNAME:-localhost}
+    stdin_open: true
+    tty: true
+    command: npx expo start --tunnel

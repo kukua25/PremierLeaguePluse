@@ -5,6 +5,7 @@ node_modules/
 
 # Expo
 .expo/
+.expo-shared/
 dist/
 web-build/
 expo-env.d.ts
@@ -29,6 +30,9 @@ yarn-error.*
 # macOS
 .DS_Store
 *.pem
+*.swp
+*.swo
+*~
 
 # local env files
 .env*.local
@@ -39,3 +43,28 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Firebase Config - DO NOT COMMIT
+src/config/firebase.js
+
+# Guardian API Config - DO NOT COMMIT
+src/config/guardian.js
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Temporary files
+*.tmp
+*.temp
